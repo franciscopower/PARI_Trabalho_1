@@ -5,11 +5,28 @@ from collections import namedtuple
 from time import time
 import argparse
 
+#
+test_start=time.time()
+test_end=time.time()
+test_duration=test_end-test_start
+accuracy=0 #inicialmente
+number_of_types=[]
 
-def test_line():
-    pass
+def test_line(reference_letter,given_letter):
+    """
+       Compares the word the user was supposed to type and the word user typed
+       Returns true if both match, false otherwise
+       Parameters:
+           reference_letter:
+               Reference letter
+           given_letter:
+               letter to check
+       """
 
+    if reference_letter == given_letter:
+        return True
 
+    return False
 
 def statistics(inputs):
     """
