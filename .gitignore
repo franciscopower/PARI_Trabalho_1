@@ -131,3 +131,6 @@ dmypy.json
 # Added by mike
 *.pdf
 .idea/
+
+# Added by Francisco
+*.vscode
