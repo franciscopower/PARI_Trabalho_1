@@ -8,6 +8,12 @@ import colorama
 import argparse
 import readchar
 
+#
+test_start=time.time()
+test_end=time.time()
+test_duration=test_end-test_start
+accuracy=0 #inicialmente
+number_of_types=[]
 
 def test_line():
     """
