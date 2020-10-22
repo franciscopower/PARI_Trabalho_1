@@ -12,7 +12,7 @@ from random import randint
 import colorama
 import argparse
 import readchar
-
+from datetime import datetime
 
 # declare named tuple
 Result = namedtuple('Result', ['requested','received','time'])
@@ -93,10 +93,16 @@ def statistics(inputs):
     """
 
     #calculate Time
-    test_start = time.time()
-    test_end = time.time()
-    test_duration = test_end - test_start
+    t_start = time.time()
+    t_end = time.time()
+    test_duration = t_end - t_start
 
+    # test_start pass
+    now=datetime.now()
+    print ('test_start:' + now.month +now.day+ now.hour+now.minute + now.second + now.year)
+
+    #test_end pass
+    print ('test_end:' + now.month + now.day + now.hour + now.minute + now.second + now.year)
 
     #calculate accuracy
     accuracy="0"
@@ -111,7 +117,7 @@ def statistics(inputs):
     accuracy=float((count/request_char)*100)
 
     #calculate Number of hits
-      pass #sera o contador, porque accuracy e o numero de hits /total
+       #sera o contador, porque accuracy e o numero de hits /total
 
 
     #Calculate type average duration
