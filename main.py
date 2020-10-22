@@ -45,14 +45,24 @@ def time_mode(t):
 
     Args:
         t (int): time to run test
+    Return: 
+        all_results (list): list of tupples with results from all tests
     """
+    all_results = []
+    n=0
     
     tic = time.time()
     dt = 0
+    
     while dt < t:
-        test_line()
+        all_results[n] = test_line()
         toc = time.time()
         dt = toc - tic
+        n += 1
+        
+    return all_results
+        
+    
         
         
 def iter_mode(N):
@@ -60,9 +70,15 @@ def iter_mode(N):
 
     Args:
         N (int): number o times to run test
+    Return: 
+        all_results (list): list of tupples with results from all tests
+        
     """
+    all_results = []
     for n in range(N):
-        test_line()
+        all_results(n) = test_line()
+        
+    return all_results
 
 
 def statistics(inputs):
@@ -92,11 +108,11 @@ def main():
     maxi = args.max_value    
         
     if mode:
-        time_mode(maxi)
+        main_results = time_mode(maxi)
     else:
-        iter_mode(maxi)
+        main_results = iter_mode(maxi)
         
-        
+    print(statistics(main_results))
         
         
 
