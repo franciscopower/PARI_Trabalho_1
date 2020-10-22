@@ -15,6 +15,9 @@ test_duration=test_end-test_start
 accuracy=0 #inicialmente
 number_of_types=[]
 
+# declare named tuple
+Result = namedtuple('Result', ['requested','received','time'])
+
 def test_line():
     """
     Requests a char and evaluates the input. Also times the operation
@@ -37,6 +40,7 @@ def test_line():
         pass #print result in red
     
     # place requested_char, input_char and dt (delta time) in named tuple
+    return Result(requested=requested_char, received=input_char, time=dt)
     
     
     
