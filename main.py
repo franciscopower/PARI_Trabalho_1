@@ -1,4 +1,9 @@
 #!/usr/bin/python
+#-------------------------------
+#Writing test with number of letters to test or time limit
+#group number 5
+#PARI, October 2020
+
 
 # Imports
 from collections import namedtuple
@@ -8,12 +13,6 @@ import colorama
 import argparse
 import readchar
 
-#
-test_start=time.time()
-test_end=time.time()
-test_duration=test_end-test_start
-accuracy=0 #inicialmente
-number_of_types=[]
 
 # declare named tuple
 Result = namedtuple('Result', ['requested','received','time'])
@@ -92,7 +91,41 @@ def statistics(inputs):
         inputs (list): list of named tuples with test results
     Return: dictionary of statistics
     """
-    pass
+
+    #calculate Time
+    test_start = time.time()
+    test_end = time.time()
+    test_duration = test_end - test_start
+
+
+    #calculate accuracy
+    accuracy="0"
+    number_of_hits=0
+    count=0
+    for i,c in enumerate(request_char):
+        try:
+            if input_char[i]==c:
+                count +=1
+        except:
+            pass
+    accuracy=float((count/request_char)*100)
+
+    #calculate Number of hits
+      pass #sera o contador, porque accuracy e o numero de hits /total
+
+
+    #Calculate type average duration
+    type_average_duration=0
+
+    #calculate type hit average duration
+    type_hit_average_duration=0
+
+    #calculate type miss average duration
+    type_miss_average_duration=0
+
+
+
+
 
 
 
