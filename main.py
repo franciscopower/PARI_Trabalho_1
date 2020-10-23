@@ -17,6 +17,8 @@ from datetime import datetime
 # declare named tuple
 Result = namedtuple('Result', ['requested','received','time'])
 
+# -------------------------------------------------------------------
+
 def test_line():
     """
     Requests a char and evaluates the input. Also times the operation
@@ -41,7 +43,7 @@ def test_line():
     # place requested_char, input_char and dt (delta time) in named tuple
     return Result(requested=requested_char, received=input_char, time=dt)
     
-    
+ # ----------------------------------------------------------------   
     
 def time_mode(t):
     """Runs test line for a specific amount of time
@@ -66,7 +68,7 @@ def time_mode(t):
     return all_results
         
     
-        
+# ----------------------------------------------------------       
         
 def iter_mode(N):
     """Runs test line a chosen number of times
@@ -79,12 +81,13 @@ def iter_mode(N):
     """
     all_results = []
     for n in range(N):
-        all_results(n) = test_line()
+        all_results[n] = test_line()
         
     return all_results
 
+# -----------------------------------------------------------
 
-def statistics(inputs):
+def statistics(main_results, start_time, end_time):
     """Create Statistics dictionary
     
     Args: 
@@ -92,17 +95,7 @@ def statistics(inputs):
     Return: dictionary of statistics
     """
 
-    #calculate Time
-    t_start = time.time()
-    t_end = time.time()
-    test_duration = t_end - t_start
-
-    # test_start pass
-    now=datetime.now()
-    print ('test_start:' + now.month +now.day+ now.hour+now.minute + now.second + now.year)
-
-    #test_end pass
-    print ('test_end:' + now.month + now.day + now.hour + now.minute + now.second + now.year)
+    #calculate Time: sum the time of each input (third value in the results tuple)
 
     #calculate accuracy
     accuracy="0"
@@ -129,11 +122,7 @@ def statistics(inputs):
     #calculate type miss average duration
     type_miss_average_duration=0
 
-
-
-
-
-
+# -------------------------------------------------------------
 
 def main():
     """
@@ -150,12 +139,18 @@ def main():
     mode = args.user_time_mode
     maxi = args.max_value    
         
+    now = datetime.now()
+    start_time = now.strftime("%b %d %H:%M:%S %Y")
+        
     if mode:
         main_results = time_mode(maxi)
     else:
         main_results = iter_mode(maxi)
         
-    print(statistics(main_results))
+    now = datetime.now()
+    end_time = now.strftime("%b %d %H:%M:%S %Y")
+        
+    print(statistics(main_results, start_time, end_time))
         
         
 
