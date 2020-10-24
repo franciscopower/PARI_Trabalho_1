@@ -2,7 +2,11 @@ from datetime import datetime
 
 # easier way to write the date
 now = datetime.now()
+
+#weekdays as a tuple
+week=('Mon', 'Tues','Wed','Thur','Fri','Sat','Sun')
 dt_string = now.strftime("%b %d %H:%M:%S %Y")
+dt_string=week(now.weekday())
 print(dt_string)	
 
 # easier way to calculate statistics
