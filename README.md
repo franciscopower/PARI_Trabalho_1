@@ -1,11 +1,14 @@
 # PARI - Trabalho 1
 ## *Typing test*
-Teste de escrita com limite de número de letras a testar ou limite de tempo.  
+Teste de escrita com limite de número de letras a testar ou limite de tempo.
+
+### *Instruções:*
+
 Para correr o programa na linha de comandos:
+
 ```py
 ./main.py [-h] [-utm] [-mv MAX_VALUE]
 ```
-### *Instruções:*
 O programa deve receber dois argumentos de entrada que definem o modo de finalização do teste (tempo máximo ou número de inputs máximo).
 
 O teste inicia após o utilizador pressionar uma tecla (pedido feito pelo programa). Aparece uma letra minúscula no programa (gerada aleatoriamente) e aguarda o input do utilizador (basta clicar no carater do teclado).
@@ -36,7 +39,7 @@ No final aparece no ecrã as estatísticas do desafio:
 
 + Duração média das respostas corretas e incorretas do utilizador;
 
-**Boa Sorte**
+**Boa Sorte!**
 
 Trabalho prático da unidade curricular de Projeto de Automação e Robótica Industrial, Mestrado Integrado em Engenharia Mecânica, Universidade de Aveiro
 
