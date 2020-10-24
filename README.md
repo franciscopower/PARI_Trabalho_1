@@ -9,7 +9,10 @@ Para correr o programa na linha de comandos:
 ```py
 ./main.py [-h] [-utm] [-mv MAX_VALUE]
 ```
-O programa deve receber dois argumentos de entrada que definem o modo de finalização do teste (tempo máximo ou número de inputs máximo).
+O programa deve receber argumentos de entrada que definem o modo de finalização do teste (tempo máximo ou número de inputs máximo).
+O argumento `[-h] [--help]` apresenta um texto de explicação dos outros argumentos. 
+Se for usado o argumento `[-utm] [--user_time_mode]` o programa corre no modeo de tempo máximo. Caso contrário, corre no modo de inputs máximos.
+O argumento `[-mv] [--max_value]` é obrigatório e requer um número inteiro que define o número de inputs máximo ou tempo máximo, dependendo do modo escolhido.
 
 O teste inicia após o utilizador pressionar uma tecla (pedido feito pelo programa). Aparece uma letra minúscula no programa (gerada aleatoriamente) e aguarda o input do utilizador (basta clicar no carater do teclado).
 
