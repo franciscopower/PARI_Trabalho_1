@@ -73,7 +73,6 @@ def time_mode(max_time):
     global stop_test
     
     all_results = []
-    n=0
     
     tic = time.time()
     dt = 0
@@ -85,7 +84,6 @@ def time_mode(max_time):
         all_results.append(t)
         toc = time.time()
         dt = toc - tic
-        n += 1
         
     if dt > max_time:
         print('\nTest duration was of ' + str(dt) + ' seconds, more than the maximum ' + str(max_time) + ' seconds.')
