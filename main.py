@@ -62,7 +62,7 @@ def test_line():
     
  # ----------------------------------------------------------------   
     
-def time_mode(t):
+def time_mode(max_time):
     """Runs test line for a specific amount of time
 
     Args:
@@ -78,7 +78,7 @@ def time_mode(t):
     tic = time.time()
     dt = 0
     
-    while dt < t:
+    while dt < max_time:
         t = test_line()
         if stop_test:
             break
@@ -86,6 +86,9 @@ def time_mode(t):
         toc = time.time()
         dt = toc - tic
         n += 1
+        
+    if dt > max_time:
+        print('\nTest duration was of ' + str(dt) + ' seconds, more than the maximum ' + str(max_time) + ' seconds.')
         
         
     return all_results
