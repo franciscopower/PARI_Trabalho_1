@@ -181,3 +181,7 @@ def main():
 
     #print the results of the statistic function with the parameters: main_results,start_time and end_time
     print(statistics(main_results, start_time, end_time))
+
+
+if __name__ == "__main__":
+    main()
