@@ -91,7 +91,10 @@ def statistics(main_results, start_time, end_time):
     """Create Statistics dictionary
     
     Args: 
-        inputs (list): list of named tuples with test results
+        main_results (list): list of named tuples with test results
+        start_time (string): time of test begin
+        end_time (string): time of test end
+
     Return: dictionary of statistics
     """
 
@@ -126,6 +129,19 @@ def statistics(main_results, start_time, end_time):
     #calculate accuracy
     accuracy = right/(right+wrong) # multiply by 100 if expressend iin %
 
+    return {
+        'accuracy': accuracy,
+        'inputs':  main_results,
+        'number_of_hits': right,
+        'number_of_types': number_of_types,
+        'test_duration': total_time,
+        'test_end': end_time,
+        'test_start': start_time,
+        'type_average_duration': type_average_duration,
+        'type_hit_average_duration': type_hit_average_duration,
+        'type_miss_average_duration': type_miss_average_duration,
+    }
+    
 # -------------------------------------------------------------
 
 def main():
@@ -145,6 +161,7 @@ def main():
         
     now = datetime.now()
     start_time = now.strftime("%b %d %H:%M:%S %Y")
+    start_time = now.weekday() + " " + start_time
         
     if mode:
         main_results = time_mode(maxi)
@@ -153,10 +170,5 @@ def main():
         
     now = datetime.now()
     end_time = now.strftime("%b %d %H:%M:%S %Y")
-        
+    
     print(statistics(main_results, start_time, end_time))
-        
-        
-
-if __name__== "__main__":
-    main()
