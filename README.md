@@ -10,7 +10,7 @@ O programa deve receber dois argumentos de entrada que definem o modo de finaliz
 
 O teste inicia após o utilizador pressionar uma tecla (pedido feito pelo programa). Aparece uma letra minúscula no programa (gerada aleatoriamente) e aguarda o input do utilizador (basta clicar no carater do teclado).
 
-O desafio tem dois modos diferentes: tempo máximo ou número de inputs máximo. O teste só pára se:
+O desafio tem dois modos diferentes: tempo máximo ou número de inputs máximo. O teste pára se:
 
 + No modo de tempo máximo: o tempo de teste decorrido for maior do que o tempo que o utilizador definiu;
 
