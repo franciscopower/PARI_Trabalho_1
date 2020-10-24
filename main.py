@@ -13,12 +13,19 @@ from colorama import Fore, init
 import argparse
 import readchar
 from datetime import datetime
+from pprint import pprint
 
 #initialize colorama
 init(autoreset = True)
 
+#stop test bool
+stop_test = False
+
 # declare named tuple
 Result = namedtuple('Result', ['requested','received','time'])
+
+#week days
+week = ('Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun')
 
 # -------------------------------------------------------------------
 
@@ -28,6 +35,7 @@ def test_line():
     
     Return: named tuple with requested_char, input_char and dt (delta time)
     """
+    global stop_test
     
     r = randint(97,122)
     requested_char = chr(r)
@@ -36,6 +44,12 @@ def test_line():
     input_char = readchar.readchar()
     toc = time.time()
     dt = toc - tic
+    
+    if input_char == " ":
+        stop_test = True
+        print('--ATTENTION--')
+        print("You interrupted your test.")
+        return
     
     #use colorama to write output
     if requested_char == input_char:
@@ -56,17 +70,20 @@ def time_mode(t):
     Return: 
         all_results (list): list of tupples with results from all tests
     """
+    global stop_test
+    
     all_results = []
     n=0
     
     tic = time.time()
     dt = 0
     
-    while dt < t:
-        all_results[n] = test_line()
+    while dt < t and not(stop_test):
+        all_results.append(test_line()) 
         toc = time.time()
         dt = toc - tic
         n += 1
+        
         
     return all_results
         
@@ -82,13 +99,16 @@ def iter_mode(N):
         all_results (list): list of tupples with results from all tests
         
     """
+    global stop_test
+    
     all_results = []
-    for n in range(N):
-        all_results[n] = test_line()
+    for _ in range(N):
+        if stop_test:
+            break
         
+        all_results.append(test_line())
+                
     return all_results
-
-# -----------------------------------------------------------
 
 def statistics(main_results, start_time, end_time):
     """Create Statistics dictionary
@@ -102,7 +122,7 @@ def statistics(main_results, start_time, end_time):
     """
 
     right = 0 #number o right charecters
-    wrong = 0 #number o wrong  charecters
+    wrong = 0 #number o wrong charecters
     r_time = 0 #total time of right charecters
     w_time = 0 #total time of wrong charecters
 
@@ -122,18 +142,22 @@ def statistics(main_results, start_time, end_time):
 
     #Calculate type average duration
     type_average_duration = (r_time + w_time)/(right + wrong)
-
-    #calculate type hit average duration
+    
+     #calculate type hit average duration
     type_hit_average_duration = r_time/right
 
     #calculate type miss average duration
-    type_miss_average_duration = w_time/wrong
-    
+    if wrong == 0:    
+        type_miss_average_duration = 0
+    else:
+        type_miss_average_duration = w_time/wrong
+     
     #calculate accuracy
-    accuracy = right/(right+wrong) # multiply by 100 if expressend iin %
+    accuracy2 = float(right)/(float(right+wrong)) # multiply by 100 if expressend iin %
+
 
     return {
-        'accuracy': accuracy,
+        'accuracy': accuracy2,
         'inputs':  main_results,
         'number_of_hits': right,
         'number_of_types': number_of_types,
@@ -148,7 +172,7 @@ def statistics(main_results, start_time, end_time):
 # -------------------------------------------------------------
 
 def main():
-    """
+    """test_line()
     Typing test
     """
 
@@ -160,27 +184,41 @@ def main():
     args = parser.parse_args()
     
     mode = args.user_time_mode
-    maxi = args.max_value
+    maxi = int(args.max_value)
     
-    print(mode)
-    print(maxi)
+    print('-------------------------------------------------------------------')
+    print('PARI typing test.')
+    print('Francisco Power, Miguel Carvalhais, Rita Correia, October of 2020')
+    print('-------------------------------------------------------------------\n')
     
-    print("Press any key to start")
+    if mode:
+        print('Your test will last ' + str(maxi) + ' seconds.')
+    else:
+        print('You will have to type ' + str(maxi) + ' charecters.')
+    
+    print("Press any key to start the test.\n")
     start = readchar.readchar()
         
     now = datetime.now()
     start_time = now.strftime("%b %d %H:%M:%S %Y")
+    start_time = week[now.weekday()] + ' ' + start_time
         
     if mode:
         main_results = time_mode(maxi)
     else:
         main_results = iter_mode(maxi)
-        
+    
     now = datetime.now()
     end_time = now.strftime("%b %d %H:%M:%S %Y")
+    end_time = week[now.weekday()] + ' ' + end_time
 
     #print the results of the statistic function with the parameters: main_results,start_time and end_time
-    print(statistics(main_results, start_time, end_time))
+    print('')
+    pprint(statistics(main_results, start_time, end_time))
+
+    
+    print('\nThanks for playing!')
+    print('-------------------------------------------------------------------\n')
 
 
 if __name__ == "__main__":
