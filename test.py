@@ -40,10 +40,21 @@
 # print("total time: " + str(r_time + w_time))
 # print("total time 2: " + str())
 
+import readchar
+import time
+import signal
 
-myList= []
-
-for i in range(0,4):
-    myList.append(i)
+def main():
+    while True:
+            print('press a key')
+            c = readchar.readchar()
+            print('you pressed ' + c)
     
-print(myList)
+if __name__ == "__main__":
+    signal.signal(signal.SIGALRM, main)
+    signal.alarm(10)
+    try:
+        main()
+    except:
+        print("the end")
+    

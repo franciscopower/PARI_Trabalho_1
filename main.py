@@ -209,7 +209,7 @@ def main():
         print('You will have to type ' + str(maxi) + ' charecters.')
     
     print("Press any key to start the test.\n")
-    start = readchar.readchar()
+    _ = readchar.readchar()
         
     now = datetime.now()
     start_time = now.strftime("%b %d %H:%M:%S %Y")
