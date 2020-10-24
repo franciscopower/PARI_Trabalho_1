@@ -14,6 +14,7 @@ import argparse
 import readchar
 from datetime import datetime
 from pprint import pprint
+import signal
 
 #initialize colorama
 init(autoreset = True)
@@ -27,6 +28,7 @@ Result = namedtuple('Result', ['requested','received','time'])
 #week days
 week = ('Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun')
 
+all_results_time_mode = []
 # -------------------------------------------------------------------
 
 def test_line():
@@ -62,6 +64,21 @@ def test_line():
     
  # ----------------------------------------------------------------   
     
+def time_mode_loop():
+    """
+    Loop that runs in time_mode function
+    """
+    global all_results_time_mode
+    global stop_test
+
+    while True:
+        t = test_line()
+        if stop_test:
+            break
+        all_results_time_mode.append(t)
+        
+        
+    
 def time_mode(max_time):
     """Runs test line for a specific amount of time
 
@@ -71,29 +88,18 @@ def time_mode(max_time):
         all_results (list): list of tupples with results from all tests
     """
     global stop_test
+            
+    signal.signal(signal.SIGALRM, time_mode_loop)
+    signal.alarm(max_time)
     
-    all_results = []
-    n=0
-    
-    tic = time.time()
-    dt = 0
-    
-    while dt < max_time:
-        t = test_line()
-        if stop_test:
-            break
-        all_results.append(t)
-        toc = time.time()
-        dt = toc - tic
-        n += 1
+    try:
+        time_mode_loop()
+    except:
+        print(Fore.RED + "\nTime's up!")        
         
-    if dt > max_time:
-        print('\nTest duration was of ' + str(dt) + ' seconds, more than the maximum ' + str(max_time) + ' seconds.')
+    return all_results_time_mode
         
-        
-    return all_results
-        
-    
+
 # ----------------------------------------------------------       
         
 def iter_mode(N):
