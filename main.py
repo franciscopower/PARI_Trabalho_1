@@ -9,10 +9,13 @@
 from collections import namedtuple
 import time
 from random import randint
-import colorama
+from colorama import Fore, init
 import argparse
 import readchar
 from datetime import datetime
+
+#initialize colorama
+init(autoreset = True)
 
 # declare named tuple
 Result = namedtuple('Result', ['requested','received','time'])
@@ -28,7 +31,7 @@ def test_line():
     
     r = randint(97,122)
     requested_char = chr(r)
-    # write request as print("Write an " + requested_char)
+    print("Please type the letter " + Fore.BLUE + requested_char)
     tic = time.time()
     input_char = readchar.readchar()
     toc = time.time()
@@ -36,9 +39,9 @@ def test_line():
     
     #use colorama to write output
     if requested_char == input_char:
-        pass #print result in green
+        print("You typed the letter " + Fore.GREEN + input_char)
     else:
-        pass #print result in red
+        print("You typed the letter " + Fore.RED + input_char)
     
     # place requested_char, input_char and dt (delta time) in named tuple
     return Result(requested=requested_char, received=input_char, time=dt)
@@ -157,11 +160,16 @@ def main():
     args = parser.parse_args()
     
     mode = args.user_time_mode
-    maxi = args.max_value    
+    maxi = args.max_value
+    
+    print(mode)
+    print(maxi)
+    
+    print("Press any key to start")
+    start = readchar.readchar()
         
     now = datetime.now()
     start_time = now.strftime("%b %d %H:%M:%S %Y")
-    start_time = now.weekday() + " " + start_time
         
     if mode:
         main_results = time_mode(maxi)
@@ -170,6 +178,6 @@ def main():
         
     now = datetime.now()
     end_time = now.strftime("%b %d %H:%M:%S %Y")
-    
+
     #print the results of the statistic function with the parameters: main_results,start_time and end_time
     print(statistics(main_results, start_time, end_time))
