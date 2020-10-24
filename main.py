@@ -95,32 +95,36 @@ def statistics(main_results, start_time, end_time):
     Return: dictionary of statistics
     """
 
-    #calculate Time: sum the time of each input (third value in the results tuple)
+    right = 0 #number o right charecters
+    wrong = 0 #number o wrong  charecters
+    r_time = 0 #total time of right charecters
+    w_time = 0 #total time of wrong charecters
 
-    #calculate accuracy
-    accuracy="0"
-    number_of_hits=0
-    count=0
-    for i,c in enumerate(request_char):
-        try:
-            if input_char[i]==c:
-                count +=1
-        except:
-            pass
-    accuracy=float((count/request_char)*100)
-
-    #calculate Number of hits
-       #sera o contador, porque accuracy e o numero de hits /total
-
+    for t in main_results:
+        if t[0] == t[1]:
+            right += 1
+            r_time += t[2]
+        else:
+            wrong += 1
+            w_time += t[2]
+            
+    #Calculate number o types
+    number_of_types = right + wrong #same as len(main_results)
+    
+    #Calculate total time
+    total_time = r_time + w_time
 
     #Calculate type average duration
-    type_average_duration=0
+    type_average_duration = (r_time + w_time)/(right + wrong)
 
     #calculate type hit average duration
-    type_hit_average_duration=0
+    type_hit_average_duration = r_time/right
 
     #calculate type miss average duration
-    type_miss_average_duration=0
+    type_miss_average_duration = w_time/wrong
+    
+    #calculate accuracy
+    accuracy = right/(right+wrong) # multiply by 100 if expressend iin %
 
 # -------------------------------------------------------------
 
