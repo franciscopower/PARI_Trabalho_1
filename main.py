@@ -47,7 +47,7 @@ def test_line():
     
     if input_char == " ":
         stop_test = True
-        print('--ATTENTION--')
+        print('\n--ATTENTION--')
         print("You interrupted your test.")
         return
     
@@ -147,7 +147,13 @@ def statistics(main_results, start_time, end_time):
     total_time = r_time + w_time
 
     #Calculate type average duration
-    type_average_duration = (r_time + w_time)/(right + wrong)
+    if (right + wrong) == 0:
+        type_average_duration = 0
+        accuracy2 = 0
+    else:
+        type_average_duration = (r_time + w_time)/(right + wrong)
+        #calculate accuracy
+        accuracy2 = float(right)/(float(right+wrong)) # multiply by 100 if expressend iin %
     
      #calculate type hit average duration
     if right == 0:
@@ -161,8 +167,7 @@ def statistics(main_results, start_time, end_time):
     else:
         type_miss_average_duration = w_time/wrong
      
-    #calculate accuracy
-    accuracy2 = float(right)/(float(right+wrong)) # multiply by 100 if expressend iin %
+    
 
 
     return {
@@ -220,9 +225,10 @@ def main():
     now = datetime.now()
     end_time = now.strftime("%b %d %H:%M:%S %Y")
     end_time = week[now.weekday()] + ' ' + end_time
+    
+    print('\nThe test ended.\n')
 
     #print the results of the statistic function with the parameters: main_results,start_time and end_time
-    print('')
     pprint(statistics(main_results, start_time, end_time))
 
     
