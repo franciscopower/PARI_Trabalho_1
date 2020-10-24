@@ -153,7 +153,8 @@ def main():
         
     now = datetime.now()
     end_time = now.strftime("%b %d %H:%M:%S %Y")
-        
+
+    #print the results of the statistic function with the parameters: main_results,start_time and end_time
     print(statistics(main_results, start_time, end_time))
         
         
