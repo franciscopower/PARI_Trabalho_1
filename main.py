@@ -47,7 +47,7 @@ def test_line():
     
     if input_char == " ":
         stop_test = True
-        print('\n--ATTENTION--')
+        print(Fore.RED + '\n--ATTENTION--')
         print("You interrupted your test.")
         return
     
@@ -167,8 +167,6 @@ def statistics(main_results, start_time, end_time):
     else:
         type_miss_average_duration = w_time/wrong
      
-    
-
 
     return {
         'accuracy': accuracy2,
@@ -226,7 +224,7 @@ def main():
     end_time = now.strftime("%b %d %H:%M:%S %Y")
     end_time = week[now.weekday()] + ' ' + end_time
     
-    print('\nThe test ended.\n')
+    print(Fore.BLUE + '\nThe test ended.\n')
 
     #print the results of the statistic function with the parameters: main_results,start_time and end_time
     pprint(statistics(main_results, start_time, end_time))
