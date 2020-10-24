@@ -78,8 +78,11 @@ def time_mode(t):
     tic = time.time()
     dt = 0
     
-    while dt < t and not(stop_test):
-        all_results.append(test_line()) 
+    while dt < t:
+        t = test_line()
+        if stop_test:
+            break
+        all_results.append(t)
         toc = time.time()
         dt = toc - tic
         n += 1
@@ -103,10 +106,10 @@ def iter_mode(N):
     
     all_results = []
     for _ in range(N):
+        t = test_line()
         if stop_test:
             break
-        
-        all_results.append(test_line())
+        all_results.append(t)
                 
     return all_results
 
@@ -125,7 +128,7 @@ def statistics(main_results, start_time, end_time):
     wrong = 0 #number o wrong charecters
     r_time = 0 #total time of right charecters
     w_time = 0 #total time of wrong charecters
-
+    
     for t in main_results:
         if t[0] == t[1]:
             right += 1
@@ -144,7 +147,10 @@ def statistics(main_results, start_time, end_time):
     type_average_duration = (r_time + w_time)/(right + wrong)
     
      #calculate type hit average duration
-    type_hit_average_duration = r_time/right
+    if right == 0:
+        type_hit_average_duration = 0
+    else:
+        type_hit_average_duration = r_time/right
 
     #calculate type miss average duration
     if wrong == 0:    
