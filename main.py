@@ -87,7 +87,6 @@ def time_mode(max_time):
     Return: 
         all_results (list): list of tupples with results from all tests
     """
-    global stop_test
             
     signal.signal(signal.SIGALRM, time_mode_loop)
     signal.alarm(max_time)

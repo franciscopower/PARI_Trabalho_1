@@ -42,19 +42,24 @@
 
 import readchar
 import time
-import signal
-
-def main():
+import signal    
+    
+def funcao_para_interroper():
     while True:
+        try:
             print('press a key')
             c = readchar.readchar()
             print('you pressed ' + c)
+        except:
+            print("O tempo acabou")
+            break
+
+
+def main():
+    signal.signal(signal.SIGALRM, funcao_para_interroper)
+    signal.alarm(3)
+    funcao_para_interroper()
     
 if __name__ == "__main__":
-    signal.signal(signal.SIGALRM, main)
-    signal.alarm(10)
-    try:
-        main()
-    except:
-        print("the end")
+    main()
     
